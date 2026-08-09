@@ -10,11 +10,18 @@
   body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
          max-width: 640px; margin: 0 auto; padding: 3rem 1.25rem; line-height: 1.6; }
   h1 { font-size: 1.6rem; margin: .25rem 0 .5rem; }
+  h2 { font-size: 1.15rem; margin: 2rem 0 .4rem; }
+  h3 { font-size: 1rem; margin: 1.25rem 0 .3rem; }
   .brand { font-weight: 700; letter-spacing: .04em; text-transform: uppercase; font-size: .8rem; color: #6a6a6a; }
   .badge { display: inline-block; font-size: .72rem; padding: .15rem .55rem; border: 1px solid currentColor;
            border-radius: 999px; opacity: .65; margin: .25rem 0 1.25rem; }
   a { color: #2563eb; text-decoration: none; }
   a:hover { text-decoration: underline; }
+  ul { padding-left: 1.1rem; }
+  blockquote { margin: 1rem 0; padding: .5rem 1rem; border-left: 3px solid #ccc; color: #555; font-style: italic; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: .9rem; }
+  th, td { border: 1px solid #ccc; padding: .4rem .65rem; text-align: left; vertical-align: top; }
+  th { background: #f5f5f5; font-weight: 600; }
   footer { margin-top: 2.5rem; font-size: .85rem; color: #6a6a6a; }
   nav a { margin-right: 1rem; }
 </style>
@@ -22,12 +29,149 @@
 <body>
   <div class="brand">Kintree</div>
   <h1>Privacy Policy</h1>
-  <div class="badge">Coming soon</div>
-  <p>Our Privacy Policy is being finalized ahead of the app's launch and will be
-     published here. For privacy questions in the meantime, email
-     <a href="mailto:tatenda.zhou23@gmail.com">tatenda.zhou23@gmail.com</a>.</p>
+  <div class="badge">Draft — pending final review</div>
+
+  <p><strong>Effective date:</strong> to be set at publication</p>
+
+  <p><strong>Who we are:</strong> Kintree ("we", "us", "the app") is operated by <strong>Tatenda Zhou</strong>, an individual developer.</p>
+
+  <h2>1. Overview</h2>
+  <p>Kintree is a mobile app (iOS and Android) for building and sharing a family tree. You create an account, add relatives (people records) with their details and photos, organize them into one or more family trees, and optionally invite other family members to view and collaborate on a tree. This policy explains what data the app collects, why, where it is stored, who it is shared with, and the choices you have — including how to delete your account and data.</p>
+
+  <h2>2. Data we collect</h2>
+  <p>The data below reflects exactly what the app stores. Most of it is <strong>information you choose to enter</strong> about yourself and your relatives.</p>
+
+  <h3>2.1 Account information</h3>
+  <ul>
+    <li><strong>Email address</strong> — used to sign in and to receive account-related email (e.g. email verification). Stored in Firebase Authentication and in your user record.</li>
+    <li><strong>Display name</strong> — shown to other members of trees you share. Editable in the app's Profile screen.</li>
+    <li><strong>Password</strong> — handled by Firebase Authentication. We never see or store your plaintext password; authentication is delegated to Firebase.</li>
+    <li><strong>Account timestamps</strong> — when your account was created.</li>
+  </ul>
+
+  <h3>2.2 Family tree content (information you enter about relatives)</h3>
+  <p>For each person you add to a tree, the app stores whichever of these you provide:</p>
+  <ul>
+    <li><strong>Names</strong> — given name, family name, and optional maiden name.</li>
+    <li><strong>Gender</strong> — male, female, other, or unknown (unknown is the default).</li>
+    <li><strong>Life dates and places</strong> — birth date, birth place, death date, death place. Dates may be a full date or a year only.</li>
+    <li><strong>Notes</strong> — free-text notes about the person.</li>
+    <li><strong>Photo</strong> — an optional profile photo for the person (see 2.3).</li>
+    <li><strong>Relationships</strong> — links to parents and spouses (which other people in the same tree this person is related to).</li>
+    <li><strong>Life events</strong> — marriage, divorce, residence, education, occupation, immigration, military service, and custom events. Each event may include a date, place, description, and the people it involves.</li>
+  </ul>
+
+  <blockquote><strong>Note on third-party data.</strong> The relatives you add are often <strong>other living people</strong> (and deceased relatives). You are responsible for the information you enter about them. See "Your responsibilities" (Section 9).</blockquote>
+
+  <h3>2.3 Photos</h3>
+  <p>Photos you attach to a person are uploaded to <strong>Firebase Cloud Storage</strong> and stored at a path tied to the tree and person. Only members of that tree can read or write the photo, enforced by Storage security rules. The person's record holds only the download URL.</p>
+
+  <h3>2.4 Tree membership and invitations</h3>
+  <ul>
+    <li><strong>Tree membership</strong> — which accounts (by user ID) can read and write each tree. This is what enables collaboration.</li>
+    <li><strong>Invitations by email</strong> — to invite someone, you enter their email address.
+      <ul>
+        <li>If they already have a Kintree account, they are added to the tree's members.</li>
+        <li>If they do not yet have an account, the <strong>invited email address and the tree(s) they were invited to</strong> are stored as a pending invitation until they sign up, at which point they are added to those trees and the pending invitation is cleared.</li>
+      </ul>
+    </li>
+    <li><strong>Email lookup index</strong> — to resolve an invited email to an existing user, the app maintains a lookup from a (lowercased) email address to a user ID. On the production backend this entry is created only after the owning user has <strong>verified that email address</strong>.</li>
+  </ul>
+
+  <h3>2.5 On-device data (offline support)</h3>
+  <p>The app keeps a <strong>local cache</strong> of your trees, people, and events on your device so it works offline, plus a queue of changes waiting to sync. This data lives <strong>only on your device</strong> and is removed when you <strong>uninstall the app</strong> (which clears the app's on-device storage).</p>
+
+  <h3>2.6 Data we do <strong>not</strong> collect</h3>
+  <p>Based on the current app:</p>
+  <ul>
+    <li>We do <strong>not</strong> collect device location, contacts, your device's photo library (beyond a photo you explicitly pick for a person), advertising identifiers, or payment information.</li>
+    <li>We do <strong>not</strong> run advertising SDKs or third-party analytics SDKs, and we do <strong>not</strong> profile you or track you across other apps and websites. (The app does collect <strong>crash diagnostics</strong> — see Section 2.7.)</li>
+    <li>We do <strong>not</strong> ask for or store special-category data beyond what you choose to type into notes/events.</li>
+  </ul>
+
+  <h3>2.7 Crash diagnostics</h3>
+  <p>The released app includes <strong>Firebase Crashlytics</strong>, Google's crash-reporting tool. When the app crashes, it automatically collects <strong>diagnostic data about the crash</strong> — such as the type of error and a stack trace, the device model, the operating-system version, and the app version — and sends it to our Firebase project so we can find and fix stability problems. This is <strong>diagnostic data about the app, not the contents of your family tree</strong>, and it is never used for advertising. Crash collection is <strong>off in development builds</strong> and <strong>on in the released app</strong>.</p>
+
+  <h2>3. How and where data is stored</h2>
+  <p>Kintree uses <strong>Google Firebase</strong> as its backend:</p>
+  <ul>
+    <li><strong>Firebase Authentication</strong> — accounts and sign-in (email/password).</li>
+    <li><strong>Cloud Firestore</strong> — your user record, trees, people, life events, tree membership, the email lookup index, and pending invitations.</li>
+    <li><strong>Firebase Cloud Storage</strong> — person photos.</li>
+    <li><strong>Cloud Functions</strong> — server-side operations such as living-person privacy redaction (Section 5) and account-deletion cleanup (Section 6).</li>
+    <li><strong>Firebase Crashlytics</strong> — crash diagnostics from the released app (Section 2.7).</li>
+  </ul>
+  <p>Data is processed and stored on Google's infrastructure. The storage region is [to be finalized before publication].</p>
+
+  <h2>4. How we use data</h2>
+  <p>We use the data above to:</p>
+  <ul>
+    <li>create and secure your account and sign you in;</li>
+    <li>let you build, view, search, and organize your family trees;</li>
+    <li>sync your data across your devices and other members of a shared tree;</li>
+    <li>deliver email-based invitations and account email (e.g. verification);</li>
+    <li>operate, maintain, and troubleshoot the app.</li>
+  </ul>
+  <p>We do <strong>not</strong> sell your personal data, and we do <strong>not</strong> use it for advertising or to build advertising profiles. This is a standing commitment.</p>
+
+  <h2>5. Data sharing</h2>
+  <ul>
+    <li><strong>With other members of a tree.</strong> When you share a tree (or accept a share), the people, photos, life events, and notes in that tree are visible to the other members of that tree. The tree owner controls membership and can remove members or transfer ownership.</li>
+    <li><strong>Living-person privacy.</strong> A tree owner can enable a setting so that non-owner members do not see the birth/death dates, places, notes, and photo of <strong>living</strong> people; names, gender, maiden name, and relationships still show so the tree stays navigable. This redaction is <strong>enforced on our backend</strong> — server-side security rules plus a Cloud Function that serves non-owners a redacted copy — so a non-owner cannot retrieve the hidden fields even with direct database access. The tree owner always sees the full record, and deceased relatives are never redacted.</li>
+    <li><strong>With our service provider.</strong> Google <strong>Firebase</strong> processes and stores data on our behalf as described above — Authentication, Cloud Firestore, Cloud Storage, Cloud Functions, and Crashlytics (crash diagnostics) — under Google's terms. Firebase is our <strong>only</strong> third-party processor; no separate email-sending, analytics, or advertising provider is used.</li>
+    <li><strong>For legal reasons.</strong> We may disclose data if required by law or to protect rights, safety, or the integrity of the service.</li>
+    <li><strong>No other sharing.</strong> We do not otherwise share your personal data with third parties.</li>
+  </ul>
+
+  <h2>6. Data retention and deletion</h2>
+  <ul>
+    <li><strong>While your account is active</strong>, we retain your data so the app works.</li>
+    <li><strong>Deleting your account.</strong> The Profile screen has a <strong>Delete Account</strong> action. When you confirm, the app:
+      <ul>
+        <li>removes your account and your email-lookup entry, and revokes your active sessions;</li>
+        <li><strong>deletes the trees you own</strong>, including all people, life events, and uploaded photos in them;</li>
+        <li><strong>removes you from trees owned by other people</strong> — those trees and their data remain for the other members.</li>
+      </ul>
+    </li>
+    <li><strong>Deleting individual content.</strong> You can delete individual people, events, photos, or whole trees you own from within the app at any time.</li>
+    <li><strong>Backups / residual copies.</strong> Residual copies in backend backups and logs after deletion persist for [to be finalized before publication].</li>
+  </ul>
+
+  <h2>7. Security</h2>
+  <ul>
+    <li>All traffic between the app and the backend uses encrypted connections (HTTPS).</li>
+    <li>Access to each tree and its photos is restricted by server-side security rules to that tree's members.</li>
+    <li>Passwords are managed by Firebase Authentication; we do not store plaintext passwords.</li>
+  </ul>
+  <p>No method of transmission or storage is 100% secure, so we cannot guarantee absolute security.</p>
+
+  <h2>8. Children's data</h2>
+  <p>Kintree lets you record information about relatives, who <strong>may include children</strong> (e.g. your own children added to a tree). This information is entered by an adult account holder, not collected directly from a child.</p>
+  <p><strong>You must be at least 13 years old to create a Kintree account, and the app is not directed to children under 13.</strong> We do not knowingly let children under 13 create an account or knowingly collect personal information directly from a child under 13 (consistent with COPPA). If you believe a child under 13 has created an account, contact us (Section 12) and we will remove it. We request a general-audience age rating consistent with this stance and do not market the app to children.</p>
+
+  <h2>9. Your responsibilities and rights</h2>
+  <ul>
+    <li><strong>Your responsibilities.</strong> Because much of the content is about other people, only add information you have the right to record and share, and respect the privacy of living relatives.</li>
+    <li><strong>Your rights.</strong> Depending on where you live (e.g. GDPR/UK GDPR, CCPA/CPRA), you may have rights to access, correct, export, or delete your personal data, and to object to or restrict certain processing. You can exercise most of these directly in the app (edit/delete content, delete account). For anything else, contact us.
+      <br>Where they apply to you, we aim to honor data-protection rights under the <strong>EU/UK GDPR</strong> and the <strong>California CCPA/CPRA</strong>. Under the GDPR, our legal bases are <strong>performance of a contract</strong> (providing the Service you sign up for) and your <strong>consent</strong> (for optional content you choose to add); for crash diagnostics we rely on our <strong>legitimate interest</strong> in keeping the app stable.</li>
+    <li><strong>Data portability.</strong> You can export your tree data at any time using the app's <strong>GEDCOM export</strong> to obtain a portable copy of your family data.</li>
+    <li><strong>Right to complain (EU/UK).</strong> If you are in the EU or UK, you also have the right to lodge a complaint with your local data-protection <strong>supervisory authority</strong> (e.g. your national Data Protection Authority or, in the UK, the ICO).</li>
+  </ul>
+
+  <h3>California residents (CCPA/CPRA)</h3>
+  <p>In the preceding 12 months we collect the categories of personal information described in <strong>Section 2</strong> — chiefly <strong>identifiers</strong> (email, display name, user ID) and the <strong>family-tree content and photos</strong> you choose to enter, together with <strong>crash diagnostics</strong> (Section 2.7) — for the purposes in <strong>Section 4</strong>. We <strong>do not sell or share</strong> your personal information, including for cross-context behavioral advertising, and have not done so; accordingly no "Do Not Sell or Share My Personal Information" link is required. California residents have the right to <strong>know, access, delete,</strong> and <strong>correct</strong> personal information, to <strong>limit the use of sensitive personal information</strong>, and to <strong>not be discriminated against</strong> for exercising these rights. Exercise them via the in-app controls (edit/delete content, delete account, GEDCOM export) or by contacting us (Section 12).</p>
+
+  <h2>10. International users and transfers</h2>
+  <p>If you use the app from outside the region where the data is stored (Section 3), your data will be transferred to and processed in that region. For users in the EU/UK, transfers to another region rely on <strong>Google's Standard Contractual Clauses</strong> as offered through Firebase.</p>
+
+  <h2>11. Changes to this policy</h2>
+  <p>We may update this policy. We will post the updated version with a new "Last updated" date and, for material changes, provide notice in the app or by email.</p>
+
+  <h2>12. Contact us</h2>
+  <p>Questions or requests about your data: <a href="mailto:tatenda.zhou23@gmail.com">tatenda.zhou23@gmail.com</a>.</p>
+
   <footer>
-    <nav><a href="/familytreeapp-legal/">Home</a><a href="/familytreeapp-legal/terms">Terms</a><a href="/familytreeapp-legal/support">Support</a></nav>
+    <nav><a href="/familytreeapp-legal/">Home</a><a href="/familytreeapp-legal/privacy">Privacy</a><a href="/familytreeapp-legal/terms">Terms</a><a href="/familytreeapp-legal/eula">EULA</a><a href="/familytreeapp-legal/support">Support</a></nav>
   </footer>
 </body>
 </html>

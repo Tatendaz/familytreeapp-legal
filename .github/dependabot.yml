@@ -1,0 +1,15 @@
+# Dependabot version updates for the workflow actions (this repo has no packages).
+# Monthly, grouped and capped to keep review volume low; the 7-day cooldown keeps
+# brand-new releases out of version PRs. Security updates ignore the cooldown.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 3
+    groups:
+      actions-minor-patch:
+        update-types: [minor, patch]

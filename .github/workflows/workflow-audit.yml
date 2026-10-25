@@ -1,7 +1,8 @@
 name: Workflow audit
 
-# Static audit of these workflows with zizmor on every PR and push to main. Fails on
-# high-severity findings (unpinned actions, script injection, dangerous triggers).
+# Static audit of the workflows and dependabot.yml with zizmor on every PR and push
+# to main. Fails on high-severity findings (unpinned actions, script injection,
+# dangerous triggers).
 on:
   push:
     branches: [main]
@@ -24,4 +25,4 @@ jobs:
         env:
           # Online audits (impostor commits, known-vulnerable actions) read the public API.
           GH_TOKEN: ${{ github.token }}
-        run: pipx run zizmor==1.31.1 --min-severity high --format github .github/workflows
+        run: pipx run zizmor==1.31.1 --min-severity high --format github .github

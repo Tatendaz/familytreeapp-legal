@@ -1,6 +1,0 @@
-# Dependabot PRs carry no `@coderabbitai ignore`, so each would start an automatic
-# review and spend the shared review budget. They are gated by CI instead.
-reviews:
-  auto_review:
-    ignore_usernames:
-      - "dependabot[bot]"
